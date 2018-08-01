@@ -52,6 +52,28 @@
             <artifactId>spark-core</artifactId>
             <version>2.7.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>25.1-jre</version>
+        </dependency>
+
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-sync</artifactId>
+                <version>3.8.0</version>
+            </dependency>
+
+        <!-- https://mvnrepository.com/artifact/eu.verdelhan/ta4j -->
+        <!-- https://mvnrepository.com/artifact/org.ta4j/ta4j-core -->
+        <dependency>
+            <groupId>org.ta4j</groupId>
+            <artifactId>ta4j-core</artifactId>
+            <version>0.11</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>
@@ -61,9 +83,31 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <!-- or whatever version you use -->
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.10</source>
+                    <target>1.10</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.spear.canslim.Main</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

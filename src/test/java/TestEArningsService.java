@@ -1,29 +1,19 @@
-import com.spear.canslim.EarningsAnalyzer;
+import com.spear.canslim.StockFundamentalGenerator;
 import org.junit.Test;
 
 import java.io.IOException;
 
 public class TestEArningsService {
 
-  EarningsAnalyzer earningsService = new EarningsAnalyzer("AAPL");
+
 
   public TestEArningsService() throws IOException {
   }
 
   @Test
-  public void testEarnings() {
-    System.out.println("test");
-    try {
-      earningsService.epsPercentageGainFromAYearAgo();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
+  public void testFundamentals() {
+    StockFundamentalGenerator.genearteStockData("AAPL");
   }
 
-  @Test
-  public void testSlope() {
-    earningsService.getSlopeOfEps();
-  }
 
 }
