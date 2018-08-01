@@ -24,12 +24,19 @@ public enum MongoDB implements Database {
 
     MongoDB() {
 
-        MongoClient mongoClient =
-                Optional.ofNullable(System.getenv("MONGODB_URI"))
-                    .map(s -> MongoClients.create(s))
-                    .orElse(MongoClients.create());
+        MongoClient mongoClient;
 
-        
+        Optional<String> mongoString;
+
+                mongoString = Optional.ofNullable(System.getenv("MONGODB_URI"));
+
+                if (mongoString.isPresent()) {
+                    mongoClient = MongoClients.create(mongoString.get());
+                } else {
+                    mongoClient = MongoClients.create();
+                }
+
+
         database = mongoClient.getDatabase("canslim");
         mongoClient.listDatabaseNames().forEach(new Consumer<String>() {
             @Override
