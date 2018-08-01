@@ -9,6 +9,7 @@ import org.bson.Document;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -22,8 +23,13 @@ public enum MongoDB implements Database {
     MongoDatabase database;
 
     MongoDB() {
-        // To directly connect to the default server localhost on port 27017
-        MongoClient mongoClient = MongoClients.create();
+
+        MongoClient mongoClient =
+                Optional.ofNullable(System.getenv("MONGODB_URI"))
+                    .map(s -> MongoClients.create(s))
+                    .orElse(MongoClients.create());
+
+        
         database = mongoClient.getDatabase("canslim");
         mongoClient.listDatabaseNames().forEach(new Consumer<String>() {
             @Override
