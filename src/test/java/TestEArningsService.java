@@ -1,4 +1,3 @@
-import com.spear.canslim.StockFundamentalGenerator;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -12,7 +11,7 @@ public class TestEArningsService {
 
   @Test
   public void testFundamentals() {
-    StockFundamentalGenerator.genearteStockData("AAPL");
+    //StockFundamentalGenerator.genearteStockData("AAPL");
   }
 
 
